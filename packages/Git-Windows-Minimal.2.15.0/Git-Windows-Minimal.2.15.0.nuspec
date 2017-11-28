@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Git-Windows-Minimal</id>
+    <version>2.15.0</version>
+    <title>Minimal Git for Windows (MinGit)</title>
+    <authors>ContainerAdministrator</authors>
+    <owners>ContainerAdministrator</owners>
+    <licenseUrl>https://github.com/git-for-windows/git/blob/master/COPYING</licenseUrl>
+    <projectUrl>https://git-for-windows.github.io/</projectUrl>
+    <iconUrl>https://avatars2.githubusercontent.com/u/4571183?v=3&amp;s=200</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Git for Windows focuses on offering a lightweight, native set of tools that bring the full feature set of the Git to Windows while providing appropriate user interfaces for experienced users.
+
+Minimal Git for Windows is a reduced sized package designed to support application integration (like integrated development environments, graph visualizers, etc.) where full console support (colorization, pagniation, etc.) is not needed. Additionally, non-critical packages such as Git-Bash, Git-Gui, PERL, Python, and Tcl are excluded from Minimal Git for Windows to reduce the package size.</description>
+    <summary>The power of Git on Windows. Offering a lightweight, native set of tools that bring the core feature set of Git to Windows.</summary>
+    <releaseNotes>https://github.com/git-for-windows/git/releases/tag/v2.15.0.windows.1</releaseNotes>
+    <copyright>https://git-for-windows.github.io/governance-model.html</copyright>
+    <language />
+    <tags>git scm vcs windows light-weight dvcs mingit</tags>
+  </metadata>
+</package>

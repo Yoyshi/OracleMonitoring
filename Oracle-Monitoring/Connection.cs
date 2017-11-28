@@ -12,6 +12,7 @@ namespace Oracle_Monitoring
 {
     public partial class Connection : Form
     {
+        FonctionGenerale fonction; 
         public Connection()
         {
             InitializeComponent();
