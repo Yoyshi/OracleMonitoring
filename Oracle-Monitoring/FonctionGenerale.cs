@@ -55,7 +55,7 @@ namespace Oracle_Monitoring
             set { tnsname = value; }
         }
 
-        public FonctionGenerale(string server, string port, string tns, string user, string password)
+        public FonctionGenerale()
         {
             //A la création de l'objet, check si fichier sqlite existe 
             //Si il n'existe pas
@@ -72,6 +72,10 @@ namespace Oracle_Monitoring
                 command.ExecuteNonQuery();
             }
 
+        }
+
+        public void init(string server, string port, string tns, string user, string password)
+        {
             this.servername = server;
             this.port = port;
             this.tnsname = tns;
@@ -84,6 +88,7 @@ namespace Oracle_Monitoring
             try
             {
                 string sql = "insert into connection (name, servername, port, tnsname, username, password) VALUES(";
+                sql = sql + "'" + username + "@" + servername +"',";
                 sql = sql + "'" + servername + "',";
                 sql = sql + "'" + port + "',";
                 sql = sql + "'" + tnsname + "',";
