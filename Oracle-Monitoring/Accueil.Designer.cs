@@ -59,7 +59,7 @@
             // tableSpaceToolStripMenuItem
             // 
             this.tableSpaceToolStripMenuItem.Name = "tableSpaceToolStripMenuItem";
-            this.tableSpaceToolStripMenuItem.Size = new System.Drawing.Size(79, 20);
+            this.tableSpaceToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
             this.tableSpaceToolStripMenuItem.Text = "TableSpace";
             // 
             // utilisateurToolStripMenuItem
@@ -77,7 +77,7 @@
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.Visible = false;
             // 
-            // Form1
+            // Accueil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -85,8 +85,9 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form1";
+            this.Name = "Accueil";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Accueil_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

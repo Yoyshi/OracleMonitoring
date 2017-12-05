@@ -16,5 +16,11 @@ namespace Oracle_Monitoring
         {
             InitializeComponent();
         }
+
+        private void Accueil_Load(object sender, EventArgs e)
+        {
+            Connection f = new Connection();
+            f.Show();
+        }
     }
 }

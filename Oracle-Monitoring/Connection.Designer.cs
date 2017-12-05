@@ -163,6 +163,7 @@
             this.Controls.Add(this.comboBox1);
             this.Name = "Connection";
             this.Text = "Connection";
+            this.Load += new System.EventHandler(this.Connection_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

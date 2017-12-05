@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Data.SQLite;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Oracle_Monitoring
 {
@@ -59,7 +56,7 @@ namespace Oracle_Monitoring
         {
             //A la création de l'objet, check si fichier sqlite existe 
             //Si il n'existe pas
-            if (!System.IO.File.Exists(appPath))
+            if (!System.IO.File.Exists(appPath + "Connect.sqlite"))
             {
                 //Création du fichier
                 SQLiteConnection.CreateFile(appPath + "Connect.sqlite");
@@ -70,6 +67,12 @@ namespace Oracle_Monitoring
                 string sql = "create table connection (name varchar(20), servername varchar(50), port varchar(6), tnsname varchar(50), username varchar(100), password varchar(100))";
                 SQLiteCommand command = new SQLiteCommand(sql, sqlite2);
                 command.ExecuteNonQuery();
+            }
+            else
+            {
+                //Iniialisation de la connexion SQLite
+                sqlite2 = new SQLiteConnection("Data Source=" + appPath + "Connect.sqlite");
+                sqlite2.Open();
             }
 
         }
@@ -95,7 +98,7 @@ namespace Oracle_Monitoring
                 sql = sql + "'" + username + "',";
                 sql = sql + "'" + password + "')";
 
-                SQLiteCommand commande = new SQLiteCommand(sql, sqlite2 = new SQLiteConnection("Data Source=" + appPath));
+                SQLiteCommand commande = new SQLiteCommand(sql, sqlite2);
                 commande.ExecuteNonQuery();
 
                 return true;
@@ -106,13 +109,35 @@ namespace Oracle_Monitoring
             }
         }
 
-        public SQLiteDataReader readConnectionString()
+        public SQLiteDataAdapter readConnectionString()
+        {
+            string sql = "select name from connection order by name desc";
+            SQLiteCommand commande = new SQLiteCommand(sql, sqlite2);
+
+            SQLiteDataAdapter reader = new SQLiteDataAdapter(sql, sqlite2);
+            return reader;
+        }
+
+        public SQLiteDataAdapter readConnectionString2()
         {
             string sql = "select * from connection order by name desc";
-            SQLiteCommand commande = new SQLiteCommand(sql, sqlite2 = new SQLiteConnection("Data Source=" + appPath));
+            SQLiteCommand commande = new SQLiteCommand(sql, sqlite2);
 
-            SQLiteDataReader reader = commande.ExecuteReader();
+            SQLiteDataAdapter reader = new SQLiteDataAdapter(sql, sqlite2);
             return reader;
+        }
+
+        public OracleConnection setOracle()
+        {
+            OracleConnection con = new OracleConnection();
+
+            connection = "Data Source=(DESCRIPTION =(ADDRESS = (PROTOCOL = TCP)(HOST = " + servername + ")";
+            connection = connection + "(PORT = " + port + "))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = " + tnsname + ")));";
+            connection = connection + "Password=" + password + ";User ID=" + username;
+            con.ConnectionString = connection;
+            con.Open();
+
+            return con;
         }
 
     }

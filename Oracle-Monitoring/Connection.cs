@@ -1,12 +1,8 @@
-﻿using System;
+﻿using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SQLite;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Oracle_Monitoring
@@ -19,54 +15,66 @@ namespace Oracle_Monitoring
         {
             InitializeComponent();
 
-            SQLiteDataReader reader = fonction.readConnectionString();
+            SQLiteDataAdapter reader = fonction.readConnectionString();
 
-            if (reader["name"] != DBNull.Value)
+            if (reader != null)
             {
                 comboBox1.Visible = true;
+                DataSet ds = new DataSet();
+                DataTable dt = new DataTable();
 
-                while (reader != null)
-                {
-                    comboBox1.Items.Add(reader["name"]);
-                }
+                reader.Fill(ds);
+                dt = ds.Tables[0];
+
+                comboBox1.DisplayMember = "name";
             }
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SQLiteDataReader reader = fonction.readConnectionString();
+            /*SQLiteDataAdapter reader = fonction.readConnectionString2();
 
-            if (reader["name"] != DBNull.Value)
+            if (reader != null)
             {
                 comboBox1.Visible = true;
 
-                while (reader != null)
+                DataSet ds = new DataSet();
+                DataTable dt = new DataTable();
+
+                reader.Fill(ds);
+                dt = ds.Tables[0];
+
+                string cb = comboBox1.SelectedItem.ToString();
+                string name = reader["name"].ToString();
+                if (cb == name)
                 {
-                    string cb = comboBox1.SelectedItem.ToString();
-                    string name = reader["name"].ToString();
-                    if (cb == name)
-                    {
-                        textBox1.Text = reader["servername"].ToString();
-                        textBox2.Text = reader["port"].ToString();
-                        textBox3.Text = reader["tnsname"].ToString();
-                        textBox4.Text = reader["username"].ToString();
-                        textBox5.Text = reader["password"].ToString();
-                    }
+                    textBox1.Text = reader["servername"].ToString();
+                    textBox2.Text = reader["port"].ToString();
+                    textBox3.Text = reader["tnsname"].ToString();
+                    textBox4.Text = reader["username"].ToString();
+                    textBox5.Text = reader["password"].ToString();
                 }
-            }
+
+            }*/
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            SQLiteDataReader reader = fonction.readConnectionString();
+            /*SQLiteDataReader reader = fonction.readConnectionString();
+
+            string server;
+            string port;
+            string tns;
+            string user;
+            string password;
 
             if (reader == null)
             {
-                string server = textBox1.Text;
-                string port = textBox2.Text;
-                string tns = textBox3.Text;
-                string user = textBox4.Text;
-                string password = textBox5.Text;
+                server = textBox1.Text;
+                port = textBox2.Text;
+                tns = textBox3.Text;
+                user = textBox4.Text;
+                password = textBox5.Text;
 
                 fonction.init(server, port, tns, user, password);
                 try
@@ -83,22 +91,30 @@ namespace Oracle_Monitoring
                 int i = 0;
                 while (reader.Read())
                 {
-                    if (reader["servername"] == textBox1.Text)
+                    string name = Convert.ToString(reader["servername"]);
+                    MessageBox.Show(name);
+                    if (name = textBox1.Text)
                     {
                         i++;
+                        if(i == 1)
+                        {
+                            server = textBox1.Text;
+                            port = textBox2.Text;
+                            tns = textBox3.Text;
+                            user = textBox4.Text;
+                            password = textBox5.Text;
+
+                            fonction.init(server, port, tns, user, password);
+                        }
                     }
                 }
-                if (i != 0)
+                if (i == 0)
                 {
-                    
-                }
-                else
-                {
-                    string server = textBox1.Text;
-                    string port = textBox2.Text;
-                    string tns = textBox3.Text;
-                    string user = textBox4.Text;
-                    string password = textBox5.Text;
+                    server = textBox1.Text;
+                    port = textBox2.Text;
+                    tns = textBox3.Text;
+                    user = textBox4.Text;
+                    password = textBox5.Text;
 
                     fonction.init(server, port, tns, user, password);
                     try
@@ -110,7 +126,22 @@ namespace Oracle_Monitoring
                         MessageBox.Show("" + ex);
                     }
                 }
-            }
+
+                try
+                {
+                    OracleConnection oracle = new OracleConnection();
+                    oracle = fonction.setOracle();
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show("" + ex);
+                }
+            }*/
+        }
+
+        private void Connection_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
